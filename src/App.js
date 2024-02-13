@@ -6,9 +6,7 @@ import { TodoContext } from "./context/todoContext";
 
 function App() {
   const [isUpdate, setIsUpdate] = useState(false);
-
   const [newTask, setNewTask] = useState("");
-
   const [id, setId] = useState(null);
   // const [isLoading, setIsLoading] = useState(false);
   return (

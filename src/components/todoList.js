@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from "react";
 import Todo from "./todo";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchAllTodos } from "../todoHandlers/fetchAllTodos";
+import Details from "./details";
 // import { TodoContext } from "../context/todoContext";
 
 function TodoList() {
   const {
-    isFetching,
     isLoading,
     isError,
     error,
@@ -15,7 +15,7 @@ function TodoList() {
     queryKey: ["todos"],
     queryFn: fetchAllTodos,
   });
-  // if (isFetching) return "Loading...";
+
   if (isLoading) return "Loading...";
 
   if (isError) {
@@ -23,12 +23,19 @@ function TodoList() {
     return "An error has occurred";
   }
 
+  const completedTask = todos.filter((todo) => todo.completed).length;
+
   console.log("todosss", todos);
   return (
-    <ul className="todo-list">
-      {todos &&
-        todos.map((todo, idx) => <Todo key={todo._id} todo={todo} idx={idx} />)}
-    </ul>
+    <>
+      <Details totalTask={todos.length} completedTask={completedTask} />
+      <ul className="todo-list">
+        {todos &&
+          todos.map((todo, idx) => (
+            <Todo key={todo._id} todo={todo} idx={idx} />
+          ))}
+      </ul>
+    </>
   );
 }
 
