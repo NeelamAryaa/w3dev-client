@@ -23,7 +23,8 @@ function TodoList() {
     return "An error has occurred";
   }
 
-  const completedTask = todos.filter((todo) => todo.completed).length;
+  // const completedTask = todos.filter((todo) => todo.completed).length;
+  const completedTask = todos.filter((todo) => todo.isCompleted).length;
 
   console.log("todosss", todos);
   return (
@@ -32,7 +33,8 @@ function TodoList() {
       <ul className="todo-list">
         {todos &&
           todos.map((todo, idx) => (
-            <Todo key={todo._id} todo={todo} idx={idx} />
+            // <Todo key={todo._id} todo={todo} idx={idx} />
+            <Todo key={todo.id} todo={todo} idx={idx} />
           ))}
       </ul>
     </>

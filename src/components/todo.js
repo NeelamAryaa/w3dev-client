@@ -60,17 +60,20 @@ function Todo({ todo, idx }) {
           backgroundColor: `hsl(${Math.random() * 360}, 50%, 80%)`,
         }}
       >
-        <div className={`todo-item ${todo.completed ? "completed" : ""}`}>
+        {/* <div className={`todo-item ${todo.completed ? "completed" : ""}`}> */}
+        <div className={`todo-item ${todo.isCompleted ? "completed" : ""}`}>
           {idx + 1 + ") " + todo.task}
         </div>
         <div className="todo-btn">
-          {!todo.completed && (
+          {!todo.isCompleted && (
             <>
-              <Button onClick={() => handleEditTodo(todo._id, todo.task)}>
+              {/* <Button onClick={() => handleEditTodo(todo._id, todo.task)}> */}
+              <Button onClick={() => handleEditTodo(todo.id, todo.task)}>
                 Edit
               </Button>
               <Button
-                onClick={() => handleCompleteTodo(todo._id)}
+                // onClick={() => handleCompleteTodo(todo._id)}
+                onClick={() => handleCompleteTodo(todo.id)}
                 disabled={completing}
               >
                 {completing ? (
@@ -87,7 +90,8 @@ function Todo({ todo, idx }) {
           )}
 
           <Button
-            onClick={() => handleDeleteTodo(todo._id)}
+            // onClick={() => handleDeleteTodo(todo._id)}
+            onClick={() => handleDeleteTodo(todo.id)}
             disabled={deleting}
           >
             {deleting ? (

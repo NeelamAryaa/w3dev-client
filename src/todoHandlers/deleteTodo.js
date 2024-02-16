@@ -1,7 +1,7 @@
 import { BASE_URL } from "../config/config";
 export const deleteTodo = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}/todos/${id}`, {
+    const response = await fetch(`${BASE_URL}/todo/${id}`, {
       method: "DELETE",
     });
 
