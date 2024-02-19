@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import Todo from "./todo";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { fetchAllTodos } from "../todoHandlers/fetchAllTodos";
 import Details from "./details";
-// import { TodoContext } from "../context/todoContext";
 
 function TodoList() {
   const {
@@ -19,14 +18,12 @@ function TodoList() {
   if (isLoading) return "Loading...";
 
   if (isError) {
-    console.log(error);
     return "An error has occurred";
   }
 
   // const completedTask = todos.filter((todo) => todo.completed).length;
   const completedTask = todos.filter((todo) => todo.isCompleted).length;
 
-  console.log("todosss", todos);
   return (
     <>
       <Details totalTask={todos.length} completedTask={completedTask} />

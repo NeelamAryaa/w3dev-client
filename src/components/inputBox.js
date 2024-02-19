@@ -23,8 +23,8 @@ function InputBox() {
       setNewTask("");
     },
     onError: (error) => {
-      console.error("Error adding todo:", error);
-      notify("😔 Opps! Error While Adding Todo.");
+      console.error("Error adding todo:", error.message);
+      notify("😔 " + error.message || "😔 Opps! Error While Adding Todo.");
     },
   });
 
@@ -41,12 +41,10 @@ function InputBox() {
   });
 
   const handleAddTodo = () => {
-    console.log("add pressed");
     addTodoMutation(newTask);
   };
 
   const handleUpdateTodo = () => {
-    console.log(id, newTask);
     updateTodoMutation({ id, newTask });
     setNewTask("");
     setIsUpdate(false);

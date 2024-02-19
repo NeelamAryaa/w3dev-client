@@ -1,7 +1,12 @@
 import { BASE_URL } from "../config/config";
 
-export const addNewTodo = async (newTask) => {
+export const addNewTodo = async (task) => {
   try {
+    const newTask = task.trim();
+
+    if (newTask === "") {
+      throw Error("Task Should Not Be Empty!");
+    }
     const response = await fetch(`${BASE_URL}/todos`, {
       method: "POST",
       headers: {
@@ -15,9 +20,10 @@ export const addNewTodo = async (newTask) => {
     }
 
     const data = await response.json();
-    console.log(data);
+
     return data;
   } catch (error) {
-    throw Error("Error adding todo:", error);
+    // throw Error("Error adding todo:", error);
+    throw error;
   }
 };

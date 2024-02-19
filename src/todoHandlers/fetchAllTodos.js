@@ -8,6 +8,6 @@ export const fetchAllTodos = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 };
