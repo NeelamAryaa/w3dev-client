@@ -1,9 +1,12 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function Header() {
+function Header() {
+  console.log("header");
   return (
     <header>
       <h1 style={{ fontWeight: "bold" }}>ToDo App</h1>
     </header>
   );
 }
+
+export default Header;

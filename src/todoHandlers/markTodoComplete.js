@@ -15,7 +15,7 @@ export const markTodoComplete = async (id) => {
     const updatedTodo = await response.json();
     return updatedTodo;
   } catch (error) {
-    console.error("Error updating todo:", error);
+    // console.error("Error updating todo:", error);
     throw error;
   }
 };

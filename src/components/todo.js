@@ -21,7 +21,7 @@ function Todo({ todo, idx }) {
       notify("🎉 Todo Completed Successfully! ");
     },
     onError: (error) => {
-      console.error("Error completing todo:", error);
+      // console.error("Error completing todo:", error);
       notify("😔 Opps! Error While Completing Todo. ");
     },
   });
@@ -33,7 +33,7 @@ function Todo({ todo, idx }) {
       notify("🎉 Todo Deleted Successfully! ");
     },
     onError: (error) => {
-      console.error("Error deleting todo:", error);
+      // console.error("Error deleting todo:", error);
       notify("😔 Opps! Error While Deleting Todo. ");
     },
   });
@@ -50,6 +50,7 @@ function Todo({ todo, idx }) {
     setId(id);
     setIsUpdate(true);
   };
+  console.log("todo");
 
   return (
     <>

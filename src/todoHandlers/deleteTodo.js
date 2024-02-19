@@ -7,7 +7,7 @@ export const deleteTodo = async (id) => {
 
     if (!response.ok) throw new Error("error while deleting todo");
   } catch (error) {
-    console.error("Error deleting todo:", error);
+    // console.error("Error deleting todo:", error);
     throw error;
   }
 };

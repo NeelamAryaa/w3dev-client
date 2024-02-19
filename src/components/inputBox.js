@@ -17,13 +17,14 @@ function InputBox() {
   const { mutate: addTodoMutation, isPending: adding } = useMutation({
     mutationFn: addNewTodo,
     onSuccess: () => {
+      console.log("why2times");
       queryClient.invalidateQueries({ queryKey: ["todos"] });
       notify("🎉 Todo Added Successfully!");
 
       setNewTask("");
     },
     onError: (error) => {
-      console.error("Error adding todo:", error.message);
+      // console.error("Error adding todo:", error.message);
       notify("😔 " + error.message || "😔 Opps! Error While Adding Todo.");
     },
   });
@@ -35,7 +36,7 @@ function InputBox() {
       notify("🎉 Todo Updated Successfully! ");
     },
     onError: (error) => {
-      console.error("Error updating todo:", error);
+      // console.error("Error updating todo:", error);
       notify("😔 Opps! Error While Updating Todo. ");
     },
   });
@@ -49,6 +50,8 @@ function InputBox() {
     setNewTask("");
     setIsUpdate(false);
   };
+
+  console.log("inputbox");
   return (
     <>
       <Toaster position="top-right" />

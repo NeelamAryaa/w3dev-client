@@ -15,7 +15,22 @@ function TodoList() {
     queryFn: fetchAllTodos,
   });
 
-  if (isLoading) return "Loading...";
+  // if (isLoading) return "Loading...";
+  if (isLoading)
+    return (
+      <div
+        className="d-flex
+      justify-content-center
+      align-items-center"
+        style={{ height: "400px" }}
+      >
+        <span
+          className="spinner-border spinner-border-lg"
+          role="status"
+          aria-hidden="true"
+        ></span>
+      </div>
+    );
 
   if (isError) {
     return "An error has occurred";
@@ -23,7 +38,7 @@ function TodoList() {
 
   // const completedTask = todos.filter((todo) => todo.completed).length;
   const completedTask = todos.filter((todo) => todo.isCompleted).length;
-
+  console.log("todo-list");
   return (
     <>
       <Details totalTask={todos.length} completedTask={completedTask} />
