@@ -9,6 +9,7 @@ function TodoList() {
     isLoading,
     isError,
     error,
+    refetch,
     data: todos,
   } = useQuery({
     queryKey: ["todos"],
@@ -33,15 +34,20 @@ function TodoList() {
     );
 
   if (isError) {
-    return "An error has occurred";
+    return (
+      <div className="m-5">
+        <p>Error: {error.message}</p>
+        <button onClick={refetch}>Retry</button>
+      </div>
+    );
   }
 
   // const completedTask = todos.filter((todo) => todo.completed).length;
-  const completedTask = todos.filter((todo) => todo.isCompleted).length;
-  console.log("todo-list");
+  const completedTask = todos?.filter((todo) => todo.isCompleted).length;
+
   return (
     <>
-      <Details totalTask={todos.length} completedTask={completedTask} />
+      <Details totalTask={todos?.length} completedTask={completedTask} />
       <ul className="todo-list">
         {todos &&
           todos.map((todo, idx) => (

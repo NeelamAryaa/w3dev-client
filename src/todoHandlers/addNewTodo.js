@@ -1,6 +1,7 @@
 import { BASE_URL } from "../config/config";
 
 export const addNewTodo = async (task) => {
+  console.log("call addnewtodo");
   try {
     const newTask = task.trim();
 
@@ -20,10 +21,8 @@ export const addNewTodo = async (task) => {
     }
 
     const data = await response.json();
-
     return data;
   } catch (error) {
-    // throw Error("Error adding todo:", error);
     throw error;
   }
 };

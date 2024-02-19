@@ -50,21 +50,14 @@ function Todo({ todo, idx }) {
     setId(id);
     setIsUpdate(true);
   };
-  console.log("todo");
+  // console.log("todo");
 
   return (
     <>
       <Toaster position="top-right" />
 
-      <li
-        style={{
-          backgroundColor: `hsl(${Math.random() * 360}, 50%, 80%)`,
-        }}
-      >
-        {/* <div className={`todo-item ${todo.completed ? "completed" : ""}`}> */}
-        <div className={`todo-item ${todo.isCompleted ? "completed" : ""}`}>
-          {idx + 1 + ") " + todo.task}
-        </div>
+      <li className={`${todo.isCompleted ? "completed" : ""}`}>
+        <div className={`todo-item `}>{idx + 1 + ") " + todo.task}</div>
         <div className="todo-btn">
           {!todo.isCompleted && (
             <>

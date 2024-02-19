@@ -16,13 +16,12 @@ function InputBox() {
   const queryClient = useQueryClient();
   const { mutate: addTodoMutation, isPending: adding } = useMutation({
     mutationFn: addNewTodo,
-    onSuccess: () => {
-      console.log("why2times");
+    onSuccess: (data) => {
+      console.log(data);
       queryClient.invalidateQueries({ queryKey: ["todos"] });
-      notify("🎉 Todo Added Successfully!");
-
-      setNewTask("");
+      notify("🎉 Todo Added Successfully! ");
     },
+
     onError: (error) => {
       // console.error("Error adding todo:", error.message);
       notify("😔 " + error.message || "😔 Opps! Error While Adding Todo.");
@@ -42,7 +41,9 @@ function InputBox() {
   });
 
   const handleAddTodo = () => {
+    console.log("call handleAddTodo");
     addTodoMutation(newTask);
+    setNewTask("");
   };
 
   const handleUpdateTodo = () => {
@@ -51,12 +52,17 @@ function InputBox() {
     setIsUpdate(false);
   };
 
-  console.log("inputbox");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isUpdate) handleUpdateTodo();
+    else handleAddTodo();
+  };
+
   return (
     <>
       <Toaster position="top-right" />
 
-      <div>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="New Task"
@@ -64,35 +70,20 @@ function InputBox() {
           onChange={(e) => setNewTask(e.target.value)}
         />
 
-        {isUpdate ? (
-          <Button
-            disabled={newTask === "" || updating}
-            onClick={handleUpdateTodo}
-          >
-            {updating ? (
-              <span
-                className="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-            ) : (
-              "Update"
-            )}
-          </Button>
-        ) : (
-          <Button disabled={newTask === "" || adding} onClick={handleAddTodo}>
-            {adding ? (
-              <span
-                className="spinner-border spinner-border-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-            ) : (
-              "Add"
-            )}
-          </Button>
-        )}
-      </div>
+        <Button disabled={newTask === "" || adding || updating}>
+          {adding || updating ? (
+            <span
+              className="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          ) : isUpdate ? (
+            "Update"
+          ) : (
+            "Add"
+          )}
+        </Button>
+      </form>
     </>
   );
 }

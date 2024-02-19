@@ -68,7 +68,8 @@ ul {
 }
 
 li {
-  background-color: #b8d6f7;
+  /* background-color: #b8d6f7; */
+  background-color: #c0ddfb;
   /* color: #ffffff; */
   text-transform: capitalize;
   font-size: 1.2rem;
@@ -104,5 +105,6 @@ footer p {
 
 .completed {
   /* background-color: #08973f; */
+  background-color: #c0f1c0;
   text-decoration: line-through;
 }

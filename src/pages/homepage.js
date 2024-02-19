@@ -6,7 +6,6 @@ import TodoList from "../components/todoList";
 import TodoProvider from "../context/todoContext";
 
 function Homepage() {
-  console.log("homepage");
   return (
     <div className="App">
       <Header />
