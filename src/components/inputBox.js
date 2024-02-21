@@ -17,7 +17,6 @@ function InputBox() {
   const { mutate: addTodoMutation, isPending: adding } = useMutation({
     mutationFn: addNewTodo,
     onSuccess: (data) => {
-      console.log(data);
       queryClient.invalidateQueries({ queryKey: ["todos"] });
       notify("🎉 Todo Added Successfully! ");
     },
@@ -41,7 +40,6 @@ function InputBox() {
   });
 
   const handleAddTodo = () => {
-    console.log("call handleAddTodo");
     addTodoMutation(newTask);
     setNewTask("");
   };

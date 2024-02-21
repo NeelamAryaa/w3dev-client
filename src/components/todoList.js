@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useReducer, useEffect } from "react";
 import Todo from "./todo";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllTodos } from "../todoHandlers/fetchAllTodos";
 import Details from "./details";
+import Pagination from "./pagination";
+import { initialState, reducer } from "../reducer/reducer";
 
 function TodoList() {
-  const {
-    isLoading,
-    isError,
-    error,
-    refetch,
-    data: todos,
-  } = useQuery({
-    queryKey: ["todos"],
-    queryFn: fetchAllTodos,
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { isLoading, isError, error, refetch, data } = useQuery({
+    queryKey: ["todos", state.page],
+    queryFn: () => {
+      return fetchAllTodos(state.page);
+    },
   });
 
-  // if (isLoading) return "Loading...";
+  useEffect(() => {
+    if (state.page) {
+      refetch();
+    }
+  }, [state.page, refetch]);
+
   if (isLoading)
     return (
       <div
@@ -43,18 +48,23 @@ function TodoList() {
   }
 
   // const completedTask = todos.filter((todo) => todo.completed).length;
-  const completedTask = todos?.filter((todo) => todo.isCompleted).length;
+  // const completedTask = data.todo?.filter((todo) => todo.isCompleted).length;
 
   return (
     <>
-      <Details totalTask={todos?.length} completedTask={completedTask} />
+      <Details totalTask={data.totalTodo} completedTask={data.completedTodo} />
       <ul className="todo-list">
-        {todos &&
-          todos.map((todo, idx) => (
+        {data.todo &&
+          data.todo.map((todo, idx) => (
             // <Todo key={todo._id} todo={todo} idx={idx} />
-            <Todo key={todo.id} todo={todo} idx={idx} />
+            <Todo key={todo.id} todo={todo} idx={(state.page - 1) * 5 + idx} />
           ))}
       </ul>
+      <Pagination
+        state={state}
+        dispatch={dispatch}
+        totalPage={data.totalPages}
+      />
     </>
   );
 }

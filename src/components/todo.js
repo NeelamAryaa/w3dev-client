@@ -50,7 +50,6 @@ function Todo({ todo, idx }) {
     setId(id);
     setIsUpdate(true);
   };
-  // console.log("todo");
 
   return (
     <>
